@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Idle Game (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Idle Game (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
