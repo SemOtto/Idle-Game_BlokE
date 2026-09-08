@@ -3,5 +3,14 @@
 *.suo
 *.userosscache
 *.sln.docstates
+
 bin/
 obj/
+
+packages/
+*.nupkg
+
+*.log
+
+TestResults/
+*.trx
