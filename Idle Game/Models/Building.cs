@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceTycoon.Models;
+namespace Idle_Game.Models;
 
 public class Building
 {
