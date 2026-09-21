@@ -29,7 +29,7 @@
                 <StackPanel>
 
                     <TextBlock
-                        Text="🚀 SPACE TYCOON"
+                        Text="SPACE TYCOON"
                         FontSize="30"
                         FontWeight="Bold"
                         Foreground="White"/>
@@ -48,14 +48,14 @@
 
                     <TextBlock
                         x:Name="GalaxyPointsText"
-                        Text="⭐ Galaxy Points: 0"
+                        Text="Galaxy Points: 0"
                         FontSize="16"
                         Foreground="#FFD54F"
                         HorizontalAlignment="Right"/>
 
                     <Button
                         x:Name="SaveButton"
-                        Content="💾 Opslaan"
+                        Content="Opslaan"
                         Click="SaveButton_Click"
                         Margin="0,8,0,0"/>
 
@@ -86,7 +86,7 @@
                     <StackPanel>
 
                         <TextBlock
-                            Text="💰 Jouw Credits"
+                            Text="Jouw Credits"
                             FontSize="18"
                             Foreground="#9BA8C7"/>
 
@@ -114,7 +114,7 @@
 
                         <Button
                             x:Name="MineButton"
-                            Content="⛏️ MIJN GRONDSTOFFEN"
+                            Content="MIJN GRONDSTOFFEN"
                             FontSize="18"
                             Height="60"
                             Click="MineButton_Click"/>
@@ -132,7 +132,7 @@
                     <StackPanel>
 
                         <TextBlock
-                            Text="🌌 Nieuwe Melkweg"
+                            Text="Nieuwe Melkweg"
                             FontSize="20"
                             FontWeight="Bold"
                             Foreground="#D6B8FF"/>
@@ -151,7 +151,7 @@
 
                         <Button
                             x:Name="PrestigeButton"
-                            Content="🌌 START NIEUWE MELKWEG"
+                            Content="START NIEUWE MELKWEG"
                             Click="PrestigeButton_Click"/>
 
                     </StackPanel>
@@ -171,7 +171,7 @@
                     <StackPanel>
 
                         <TextBlock
-                            Text="🏗️ Ruimte-industrie"
+                            Text="Ruimte-industrie"
                             FontSize="24"
                             FontWeight="Bold"
                             Foreground="White"
@@ -255,7 +255,7 @@
                         </ItemsControl>
 
                         <TextBlock
-                            Text="⬆️ Upgrades"
+                            Text="Upgrades"
                             FontSize="24"
                             FontWeight="Bold"
                             Foreground="White"
@@ -334,7 +334,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock
-                    Text="📜 Productielog"
+                    Text="Productielog"
                     FontSize="16"
                     FontWeight="Bold"
                     Foreground="White"/>
