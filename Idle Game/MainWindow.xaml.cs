@@ -44,14 +44,12 @@ public sealed partial class MainWindow : Window
 
         _saveTimer.Tick += SaveTimer_Tick;
 
-        Loaded += MainWindow_Loaded;
-
         Closed += MainWindow_Closed;
+
+        StartGame();
     }
 
-    private void MainWindow_Loaded(
-        object sender,
-        RoutedEventArgs e)
+    private void StartGame()
     {
         if (_saveService.SaveExists())
         {
