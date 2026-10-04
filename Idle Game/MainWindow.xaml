@@ -2,32 +2,26 @@
     x:Class="Idle_Game.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:Idle_Game.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#0B1020">
-
+    <Grid x:Name="RootGrid" Background="#0B1020">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="180"/>
         </Grid.RowDefinitions>
 
-        <Border
-            Grid.Row="0"
-            Background="#111A30"
-            Padding="25">
-
+        <Border Grid.Row="0" Background="#111A30" Padding="25">
             <Grid>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel>
-
                     <TextBlock
                         Text="SPACE TYCOON"
                         FontSize="30"
@@ -37,9 +31,8 @@
                     <TextBlock
                         Text="Bouw je eigen ruimte-imperium"
                         FontSize="14"
-                        Foreground="#9BA8C7"
+                        Foreground="#C0CBE2"
                         Margin="0,4,0,0"/>
-
                 </StackPanel>
 
                 <StackPanel
@@ -57,108 +50,106 @@
                         x:Name="SaveButton"
                         Content="Opslaan"
                         Click="SaveButton_Click"
-                        Margin="0,8,0,0"/>
-
+                        Margin="0,8,0,0"
+                        Background="#26385B"
+                        Foreground="White"/>
                 </StackPanel>
-
             </Grid>
-
         </Border>
 
-        <Grid
-            Grid.Row="1"
-            Padding="25">
-
+        <Grid Grid.Row="1" Padding="25">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel
+            <ScrollViewer
                 Grid.Column="0"
-                Margin="0,0,15,0">
+                Margin="0,0,15,0"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Disabled">
 
-                <Border
-                    Background="#111A30"
-                    CornerRadius="15"
-                    Padding="25">
+                <StackPanel>
+                    <Border
+                        Background="#111A30"
+                        CornerRadius="15"
+                        Padding="25">
 
-                    <StackPanel>
+                        <StackPanel>
+                            <TextBlock
+                                Text="Jouw Credits"
+                                FontSize="18"
+                                Foreground="#C0CBE2"/>
 
-                        <TextBlock
-                            Text="Jouw Credits"
-                            FontSize="18"
-                            Foreground="#9BA8C7"/>
+                            <TextBlock
+                                x:Name="CreditsText"
+                                Text="0"
+                                FontSize="42"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Margin="0,5,0,0"/>
 
-                        <TextBlock
-                            x:Name="CreditsText"
-                            Text="0"
-                            FontSize="42"
-                            FontWeight="Bold"
-                            Foreground="White"
-                            Margin="0,5,0,0"/>
+                            <TextBlock
+                                x:Name="IncomeText"
+                                Text="+0/sec"
+                                FontSize="20"
+                                Foreground="#64E572"
+                                Margin="0,5,0,0"/>
 
-                        <TextBlock
-                            x:Name="IncomeText"
-                            Text="+0/sec"
-                            FontSize="20"
-                            Foreground="#64E572"
-                            Margin="0,5,0,0"/>
+                            <TextBlock
+                                x:Name="ManualPowerText"
+                                Text="+10 per klik"
+                                FontSize="14"
+                                Foreground="#C0CBE2"
+                                Margin="0,5,0,20"/>
 
-                        <TextBlock
-                            x:Name="ManualPowerText"
-                            Text="+10 per klik"
-                            FontSize="14"
-                            Foreground="#9BA8C7"
-                            Margin="0,5,0,20"/>
+                            <Button
+                                x:Name="MineButton"
+                                Content="MIJN GRONDSTOFFEN"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Height="60"
+                                Background="#267A50"
+                                Foreground="White"
+                                Click="MineButton_Click"/>
+                        </StackPanel>
+                    </Border>
 
-                        <Button
-                            x:Name="MineButton"
-                            Content="MIJN GRONDSTOFFEN"
-                            FontSize="18"
-                            Height="60"
-                            Click="MineButton_Click"/>
+                    <Border
+                        Background="#17142B"
+                        CornerRadius="15"
+                        Padding="20"
+                        Margin="0,15,0,0">
 
-                    </StackPanel>
+                        <StackPanel>
+                            <TextBlock
+                                Text="Nieuwe Melkweg"
+                                FontSize="20"
+                                FontWeight="Bold"
+                                Foreground="#D6B8FF"/>
 
-                </Border>
+                            <TextBlock
+                                Text="Reset je voortgang en ontvang een permanente +10% productie per Galaxy Point."
+                                TextWrapping="Wrap"
+                                Foreground="#C0CBE2"
+                                Margin="0,8,0,12"/>
 
-                <Border
-                    Background="#17142B"
-                    CornerRadius="15"
-                    Padding="20"
-                    Margin="0,15,0,0">
+                            <TextBlock
+                                x:Name="PrestigeRequirementText"
+                                Text="Vereist: 10.000.000 credits"
+                                Foreground="#C0CBE2"
+                                Margin="0,0,0,10"/>
 
-                    <StackPanel>
-
-                        <TextBlock
-                            Text="Nieuwe Melkweg"
-                            FontSize="20"
-                            FontWeight="Bold"
-                            Foreground="#D6B8FF"/>
-
-                        <TextBlock
-                            Text="Reset je voortgang en ontvang een permanente +10% productie per Galaxy Point."
-                            TextWrapping="Wrap"
-                            Foreground="#9BA8C7"
-                            Margin="0,8,0,12"/>
-
-                        <TextBlock
-                            x:Name="PrestigeRequirementText"
-                            Text="Vereist: 10.000.000 credits"
-                            Foreground="#9BA8C7"
-                            Margin="0,0,0,10"/>
-
-                        <Button
-                            x:Name="PrestigeButton"
-                            Content="START NIEUWE MELKWEG"
-                            Click="PrestigeButton_Click"/>
-
-                    </StackPanel>
-
-                </Border>
-
-            </StackPanel>
+                            <Button
+                                x:Name="PrestigeButton"
+                                Content="START NIEUWE MELKWEG"
+                                Background="#62469B"
+                                Foreground="White"
+                                Click="PrestigeButton_Click"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
 
             <Border
                 Grid.Column="1"
@@ -166,10 +157,11 @@
                 CornerRadius="15"
                 Padding="20">
 
-                <ScrollViewer>
+                <ScrollViewer
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
 
                     <StackPanel>
-
                         <TextBlock
                             Text="Ruimte-industrie"
                             FontSize="24"
@@ -177,13 +169,9 @@
                             Foreground="White"
                             Margin="0,0,0,15"/>
 
-                        <ItemsControl
-                            x:Name="BuildingsList">
-
+                        <ItemsControl x:Name="BuildingsList">
                             <ItemsControl.ItemTemplate>
-
                                 <DataTemplate>
-
                                     <Border
                                         Background="#19233D"
                                         CornerRadius="10"
@@ -191,14 +179,12 @@
                                         Margin="0,0,0,10">
 
                                         <Grid>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel>
-
                                                 <TextBlock
                                                     Text="{Binding Name}"
                                                     FontSize="18"
@@ -208,50 +194,77 @@
                                                 <TextBlock
                                                     Text="{Binding Description}"
                                                     TextWrapping="Wrap"
-                                                    Foreground="#9BA8C7"
+                                                    Foreground="#C0CBE2"
                                                     FontSize="12"
                                                     Margin="0,4,0,0"/>
 
-                                                <TextBlock
-                                                    x:Name="AmountText"
-                                                    Text="Aantal: 0"
-                                                    Foreground="#64E572"
-                                                    Margin="0,6,0,0"/>
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    Margin="0,7,0,0">
 
-                                                <TextBlock
-                                                    x:Name="IncomeBuildingText"
-                                                    Text="+0/sec"
-                                                    Foreground="#9BA8C7"/>
+                                                    <TextBlock
+                                                        Text="Aantal: "
+                                                        Foreground="#C0CBE2"/>
 
+                                                    <TextBlock
+                                                        Text="{Binding Amount}"
+                                                        Foreground="#64E572"
+                                                        FontWeight="Bold"/>
+                                                </StackPanel>
+
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    Margin="0,3,0,0">
+
+                                                    <TextBlock
+                                                        Text="Productie: "
+                                                        Foreground="#C0CBE2"/>
+
+                                                    <TextBlock
+                                                        Text="{Binding CurrentIncome}"
+                                                        Foreground="#64E572"/>
+
+                                                    <TextBlock
+                                                        Text=" / sec"
+                                                        Foreground="#C0CBE2"/>
+                                                </StackPanel>
                                             </StackPanel>
 
                                             <StackPanel
                                                 Grid.Column="1"
-                                                HorizontalAlignment="Right">
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center">
 
-                                                <TextBlock
-                                                    x:Name="PriceText"
-                                                    Text="50"
-                                                    FontSize="16"
-                                                    Foreground="#FFD54F"
-                                                    HorizontalAlignment="Right"/>
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right">
+
+                                                    <TextBlock
+                                                        Text="{Binding CurrentPrice}"
+                                                        FontSize="16"
+                                                        FontWeight="Bold"
+                                                        Foreground="#FFD54F"/>
+
+                                                    <TextBlock
+                                                        Text=" credits"
+                                                        FontSize="12"
+                                                        Foreground="#C0CBE2"
+                                                        VerticalAlignment="Center"/>
+                                                </StackPanel>
 
                                                 <Button
                                                     Content="KOPEN"
                                                     Click="BuyBuilding_Click"
                                                     Tag="{Binding}"
-                                                    Margin="0,8,0,0"/>
-
+                                                    IsEnabled="{Binding CanBuy}"
+                                                    Margin="0,8,0,0"
+                                                    Background="#267A50"
+                                                    Foreground="White"/>
                                             </StackPanel>
-
                                         </Grid>
-
                                     </Border>
-
                                 </DataTemplate>
-
                             </ItemsControl.ItemTemplate>
-
                         </ItemsControl>
 
                         <TextBlock
@@ -261,13 +274,9 @@
                             Foreground="White"
                             Margin="0,20,0,15"/>
 
-                        <ItemsControl
-                            x:Name="UpgradesList">
-
+                        <ItemsControl x:Name="UpgradesList">
                             <ItemsControl.ItemTemplate>
-
-                                <DataTemplate>
-
+                                <DataTemplate x:DataType="models:Upgrade">
                                     <Border
                                         Background="#19233D"
                                         CornerRadius="10"
@@ -275,50 +284,78 @@
                                         Margin="0,0,0,10">
 
                                         <Grid>
-
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel>
-
                                                 <TextBlock
-                                                    Text="{Binding Name}"
+                                                    Text="{x:Bind Name}"
                                                     FontSize="18"
                                                     FontWeight="Bold"
                                                     Foreground="White"/>
 
                                                 <TextBlock
-                                                    Text="{Binding Description}"
+                                                    Text="{x:Bind Description}"
                                                     TextWrapping="Wrap"
-                                                    Foreground="#9BA8C7"
+                                                    Foreground="#C0CBE2"
                                                     Margin="0,4,0,0"/>
 
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    Margin="0,7,0,0">
+
+                                                    <TextBlock
+                                                        Text="Aantal: "
+                                                        Foreground="#C0CBE2"/>
+
+                                                    <TextBlock
+                                                        Text="{x:Bind Amount, Mode=OneWay}"
+                                                        Foreground="#64E572"
+                                                        FontWeight="Bold"/>
+                                                </StackPanel>
                                             </StackPanel>
 
-                                            <Button
+                                            <StackPanel
                                                 Grid.Column="1"
-                                                Content="KOPEN"
-                                                Tag="{Binding}"
-                                                Click="BuyUpgrade_Click"/>
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center">
 
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right">
+
+                                                    <TextBlock
+                                                        Text="{x:Bind CurrentPrice, Mode=OneWay}"
+                                                        FontSize="16"
+                                                        FontWeight="Bold"
+                                                        Foreground="#FFD54F"/>
+
+                                                    <TextBlock
+                                                        Text=" credits"
+                                                        FontSize="12"
+                                                        Foreground="#C0CBE2"
+                                                        VerticalAlignment="Center"/>
+                                                </StackPanel>
+
+                                                <Button
+                                                    Content="KOPEN"
+                                                    Tag="{x:Bind}"
+                                                    Click="BuyUpgrade_Click"
+                                                    IsEnabled="{x:Bind CanBuy, Mode=OneWay}"
+                                                    Margin="0,8,0,0"
+                                                    Background="#62469B"
+                                                    Foreground="White"/>
+                                            </StackPanel>
                                         </Grid>
-
                                     </Border>
-
                                 </DataTemplate>
-
                             </ItemsControl.ItemTemplate>
-
                         </ItemsControl>
-
                     </StackPanel>
-
                 </ScrollViewer>
-
             </Border>
-
         </Grid>
 
         <Border
@@ -327,7 +364,6 @@
             Padding="20">
 
             <Grid>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -344,14 +380,26 @@
                     Grid.Row="1"
                     Background="Transparent"
                     BorderThickness="0"
+                    Foreground="White"
                     Margin="0,5,0,0">
 
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter
+                                Property="Foreground"
+                                Value="#E0E7F5"/>
+
+                            <Setter
+                                Property="Background"
+                                Value="Transparent"/>
+
+                            <Setter
+                                Property="Padding"
+                                Value="2"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
-
             </Grid>
-
         </Border>
-
     </Grid>
-
 </Window>

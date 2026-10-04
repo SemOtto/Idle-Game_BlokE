@@ -14,10 +14,8 @@ public sealed partial class MainWindow : Window
 {
     private readonly GameService _game;
     private readonly SaveService _saveService;
-
     private readonly DispatcherTimer _gameTimer;
     private readonly DispatcherTimer _saveTimer;
-
     private DateTime _lastUpdate;
 
     public MainWindow()
@@ -64,7 +62,7 @@ public sealed partial class MainWindow : Window
                 _game.ApplyOfflineIncome();
 
                 AddLog(
-                    $"🌙 Welkom terug! Je hebt {offlineIncome:N0} credits verdiend tijdens je afwezigheid ({offlineTime.Hours}u {offlineTime.Minutes}m).");
+                    $"Welkom terug! Je hebt {offlineIncome:N0} credits verdiend tijdens je afwezigheid ({offlineTime.Hours}u {offlineTime.Minutes}m).");
             }
         }
 
@@ -106,11 +104,13 @@ public sealed partial class MainWindow : Window
     {
         SaveGame();
 
-        AddLog("💾 Automatisch opgeslagen.");
+        AddLog("Automatisch opgeslagen.");
     }
 
     private void UpdateUI()
     {
+        _game.UpdateDisplays();
+
         CreditsText.Text =
             $"{_game.Player.Credits:N0}";
 
@@ -121,30 +121,10 @@ public sealed partial class MainWindow : Window
             $"+{_game.Player.ManualPower:N0} per klik";
 
         GalaxyPointsText.Text =
-            $"⭐ Galaxy Points: {_game.Player.GalaxyPoints}";
-
-        UpdateBuildingButtons();
-
-        UpdateUpgradeButtons();
+            $"Galaxy Points: {_game.Player.GalaxyPoints}";
 
         PrestigeButton.IsEnabled =
             _game.CanPrestige();
-    }
-
-    private void UpdateBuildingButtons()
-    {
-        BuildingsList.ItemsSource = null;
-
-        BuildingsList.ItemsSource =
-            _game.Buildings;
-    }
-
-    private void UpdateUpgradeButtons()
-    {
-        UpgradesList.ItemsSource = null;
-
-        UpgradesList.ItemsSource =
-            _game.Upgrades;
     }
 
     private void MineButton_Click(
@@ -154,7 +134,7 @@ public sealed partial class MainWindow : Window
         _game.AddManualCredits();
 
         AddLog(
-            $"⛏️ Je hebt {_game.Player.ManualPower:N0} credits gemined.");
+            $"Je hebt {_game.Player.ManualPower:N0} credits gemined.");
 
         UpdateUI();
     }
@@ -179,49 +159,38 @@ public sealed partial class MainWindow : Window
         if (!_game.BuyBuilding(building))
         {
             AddLog(
-                $"❌ Niet genoeg credits voor {building.Name}. Nodig: {price:N0}");
+                $"Niet genoeg credits voor {building.Name}. Nodig: {price:N0}");
 
             return;
         }
 
         AddLog(
-            $"🏗️ {building.Name} gekocht voor {price:N0} credits.");
+            $"{building.Name} gekocht voor {price:N0} credits.");
 
         UpdateUI();
     }
 
-    private void BuyUpgrade_Click(
-        object sender,
-        RoutedEventArgs e)
+    private void BuyUpgrade_Click(object sender, RoutedEventArgs e)
     {
         if (sender is not Button button)
-        {
             return;
-        }
 
         if (button.Tag is not Upgrade upgrade)
-        {
             return;
-        }
 
-        if (_game.HasUpgrade(upgrade.Id))
-        {
-            AddLog(
-                $"❌ {upgrade.Name} is al gekocht.");
-
-            return;
-        }
+        double price = _game.GetUpgradePrice(upgrade);
 
         if (!_game.BuyUpgrade(upgrade))
         {
             AddLog(
-                $"❌ Niet genoeg credits voor {upgrade.Name}.");
+                $"Niet genoeg credits voor {upgrade.Name}. Nodig: {price:N0}");
 
             return;
         }
 
         AddLog(
-            $"⬆️ Upgrade gekocht: {upgrade.Name}");
+            $"{upgrade.Name} gekocht voor {price:N0} credits. " +
+            $"Aantal: {_game.GetUpgradeAmount(upgrade.Id)}");
 
         UpdateUI();
     }
@@ -237,7 +206,7 @@ public sealed partial class MainWindow : Window
 
         ContentDialog dialog = new ContentDialog
         {
-            Title = "🌌 Nieuwe Melkweg",
+            Title = "Nieuwe Melkweg",
             Content =
                 "Weet je zeker dat je een nieuwe Melkweg wilt starten?\n\n" +
                 "Je verliest je credits, gebouwen en upgrades.\n\n" +
@@ -258,7 +227,7 @@ public sealed partial class MainWindow : Window
         if (_game.Prestige())
         {
             AddLog(
-                "🌌 Nieuwe Melkweg gestart! +1 Galaxy Point.");
+                "Nieuwe Melkweg gestart! +1 Galaxy Point.");
 
             SaveGame();
 
@@ -272,7 +241,7 @@ public sealed partial class MainWindow : Window
     {
         SaveGame();
 
-        AddLog("💾 Game handmatig opgeslagen.");
+        AddLog("Game handmatig opgeslagen.");
     }
 
     private void SaveGame()
@@ -284,7 +253,7 @@ public sealed partial class MainWindow : Window
         catch (Exception ex)
         {
             AddLog(
-                $"❌ Opslaan mislukt: {ex.Message}");
+                $"Opslaan mislukt: {ex.Message}");
         }
     }
 
